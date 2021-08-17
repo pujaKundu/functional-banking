@@ -1,29 +1,28 @@
 function getInputValue(inputId) {
-    const depositInput = document.getElementById(inputId);
-    const depositAmount = parseFloat(depositInput.value);
-    //clear the deposit input field
-    depositInput.value = '';
-    return depositAmount;
+    const input = document.getElementById(inputId);
+    const inputAmount = parseFloat(input.value);
+    //clear the input field
+    input.value = '';
+    return inputAmount;
 }
 
+function updateTotalField(totalFieldId, newAmount) {
+    const total = document.getElementById(totalFieldId);
+    const previousAmount = parseFloat(total.innerText);
+    const newTotal = previousAmount + newAmount;
+    total.innerText = newTotal;
+
+}
 
 //handle deposit button handle
 document.getElementById('deposit-button')
     .addEventListener('click', function() {
-        //get amount deposited
 
+        //get input value
         const newDepositAmount = getInputValue('deposit-input');
 
-
-        const depositTotal = document.getElementById('deposit-total');
-        const previousDepositAmount = parseFloat(depositTotal.innerText);
-        const newDepositTotal = previousDepositAmount + newDepositAmount;
-        depositTotal.innerText = newDepositTotal;
-        // console.log(typeof(newDepositAmount));
-        // console.log(typeof(newDepositTotal))
-        // console.log(typeof(previousDepositAmount))
-        //clear the deposit input field
-
+        //get amount deposited
+        updateTotalField('deposit-total', newDepositAmount);
 
         //update account balance
         const balanceTotal = document.getElementById('balance-total');
@@ -40,10 +39,8 @@ document.getElementById('withdraw-button').addEventListener(
     function() {
 
         const newWithdrawAmount = getInputValue('withdraw-input')
-        const withdrawTotal = document.getElementById('withdraw-total');
-        const previousWithdrawTotal = parseFloat(withdrawTotal.innerText);
-        const newWithdrawTotal = newWithdrawAmount + previousWithdrawTotal;
-        withdrawTotal.innerText = newWithdrawTotal;
+            //update withdraw value
+        updateTotalField('withdraw-total', newWithdrawAmount);
 
 
         //update account balance
